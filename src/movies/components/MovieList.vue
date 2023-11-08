@@ -17,7 +17,9 @@
               {{ genre }}
             </span>
           </div>
-          <div class="mt-2 text-gray-700 dark:text-gray-300 text-sm">Duration: {{ movie.duration }} min.</div>
+          <div class="mt-2 text-gray-700 dark:text-gray-300 text-sm">
+            Duration: {{ movie.duration }} min.
+          </div>
           <a
             :href="movie.url"
             target="_blank"
@@ -31,18 +33,17 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
-import filmsApi from '../api/movies.api'
-import type { MovieFilter } from '@/movies/types/movie'
-import type { Movie } from '@/movies/types/movie'
+import { computed, ref } from 'vue'
+import type { Movie, MovieFilter } from '@/movies/types'
+import { useGetMoviesApi } from '../composables/useGetMoviesApi'
 
 type Props = {
   filters: MovieFilter
 }
 
 const props = defineProps<Props>()
-
-const movies = ref<Movie[]>([])
+const data = await useGetMoviesApi()
+const movies = ref<Movie[]>(data)
 
 const filteredMovies = computed(() => {
   return movies.value.filter((movie) => {
@@ -61,10 +62,6 @@ const filteredMovies = computed(() => {
   })
 })
 
-onMounted(async () => {
-  const response = await filmsApi.get('/movies')
-  movies.value = response.data
-})
 </script>
 
 <style scoped></style>

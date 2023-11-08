@@ -14,7 +14,8 @@ export type MovieFilter = {
   description: string
 }
 
-export type Genre = {
+export type MovieGenre = {
   id: string
   name: string
 }
+

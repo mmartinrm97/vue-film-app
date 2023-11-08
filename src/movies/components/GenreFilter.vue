@@ -1,17 +1,19 @@
 <template>
-  <div class="p-4 bg-gray-200 dark:bg-gray-900 text-gray-800 dark:text-gray-300 rounded dark:shadow-lg shadow-lg dark:overflow-hidden overflow-hidden">
-
+  <div
+    class="p-4 bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-300 rounded dark:shadow-lg shadow-lg dark:overflow-hidden overflow-hidden"
+  >
     <!-- Display  name filter-->
     <div class="mb-4">
       <label for="name" class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2"
         >Name:</label
       >
       <input
+        :disabled="hasError"
         id="name"
         v-model.trim="nameFilter"
         type="text"
         placeholder="Enter movie name"
-        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-300 leading-tight focus:outline-none focus:shadow-outline dark:focus:shadow-outline"
+        class="shadow appearance-none disabled:cursor-not-allowed border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-300 leading-tight focus:outline-none focus:shadow-outline dark:focus:shadow-outline"
       />
     </div>
 
@@ -21,23 +23,25 @@
         >Description:</label
       >
       <input
+        :disabled="hasError"
         id="description"
         v-model.trim="descriptionFilter"
         type="text"
         placeholder="Enter movie description"
-        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-300 leading-tight focus:outline-none focus:shadow-outline dark:focus:shadow-outline"
+        class="shadow disabled:cursor-not-allowed appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-300 leading-tight focus:outline-none focus:shadow-outline dark:focus:shadow-outline"
       />
     </div>
-        <!-- Display genre filter -->
-        <div class="mb-4">
+    <!-- Display genre filter -->
+    <div class="mb-4">
       <label for="genre" class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2"
         >Genre:</label
       >
       <input
         id="genre"
+        :disabled="hasError"
         v-model.trim="selectedGenre"
         @change="addGenreFilter"
-        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-300 leading-tight focus:outline-none focus:shadow-outline dark:focus:shadow-outline"
+        class="disabled:cursor-not-allowed shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-300 leading-tight focus:outline-none focus:shadow-outline dark:focus:shadow-outline"
         list="genre-list"
         placeholder="Enter movie genre"
       />
@@ -67,21 +71,21 @@
 </template>
 
 <script setup lang="ts">
-import filmsApi from '@/api/movies.api'
-import type { MovieFilter, Genre } from '@/movies/types/movie'
 import { ref, onMounted, watch } from 'vue'
+import type { MovieFilter, MovieGenre } from '@/movies/types'
+import { useGetGenresApi } from '../composables/useGetGenresApi'
 
 const emit = defineEmits<{
   (event: 'updateFilters', filters: MovieFilter): void
 }>()
 
 // Data from API
-const genresApiData = ref<Genre[]>([])
+const genresApiData = ref<MovieGenre[]>([])
 
 // Selected genre
 const selectedGenre = ref<string>('')
 
-// Constant to validate genre 
+// Constant to validate genre
 //TODO: Validate genre
 const isValidGenre = ref(true)
 
@@ -113,9 +117,21 @@ function removeGenreFilter(genre: string) {
   }
 }
 
+const hasError = ref<boolean>(true)
+
+async function loadGenres() {
+  hasError.value = true
+  try {
+    const data = await useGetGenresApi()
+    genresApiData.value = data
+    hasError.value = false
+  } catch (error: any) {
+    hasError.value = true
+  }
+}
+
 onMounted(async () => {
-  const result = await filmsApi.get<Genre[]>('/genres')
-  genresApiData.value = result.data
+  await loadGenres()
 })
 </script>
 
