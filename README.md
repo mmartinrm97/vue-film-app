@@ -1,4 +1,4 @@
-# vue-vite-film-app
+# vue-film-app-delfosti-miguel-ramos
 
 This app is a simple film app that uses the an external api to fetch data.
 
