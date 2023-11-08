@@ -18,4 +18,3 @@ export type MovieGenre = {
   id: string
   name: string
 }
-

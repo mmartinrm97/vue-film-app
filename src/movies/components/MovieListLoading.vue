@@ -1,11 +1,11 @@
 <template>
-    <div class="text-gray-700 dark:text-gray-300 text-xl">
-    <div class="w-full flex flex-col items-center justify-center gap-y-4">
-      <span class="animate-pulse items-center justify-center flex">Loading</span>
+  <div class="text-xl text-gray-700 dark:text-gray-300">
+    <div class="flex w-full flex-col items-center justify-center gap-y-4">
+      <span class="flex animate-pulse items-center justify-center">Loading</span>
       <!-- add a spinner -->
-      <div class="items-center justify-center flex">
+      <div class="flex items-center justify-center">
         <svg
-          class="animate-spin h-8 w-8 dark:text-gray-200 text-gray-600 "
+          class="h-8 w-8 animate-spin text-gray-600 dark:text-gray-200"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"

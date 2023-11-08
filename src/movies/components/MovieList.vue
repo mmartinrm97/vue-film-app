@@ -1,33 +1,13 @@
 <template>
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+  <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
     <div v-for="movie in filteredMovies" :key="movie.id">
-      <div
-        class="bg-white dark:bg-gray-900 shadow-lg dark:shadow-lg rounded-lg dark:overflow-hidden overflow-hidden h-full"
-      >
-        <img class="w-full h-72 object-cover" :src="movie.movie_cover" :alt="movie.title" />
-        <div class="p-4">
-          <h2 class="text-xl font-semibold text-gray-900 dark:text-gray-100">{{ movie.title }}</h2>
-          <p class="text-gray-700 dark:text-gray-300 text-sm">{{ movie.description }}</p>
-          <div class="mt-2">
-            <span
-              class="inline-block bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-xs font-semibold rounded-full px-2 py-1 mr-1"
-              v-for="genre in movie.genre.split(', ')"
-              :key="genre"
-            >
-              {{ genre }}
-            </span>
-          </div>
-          <div class="mt-2 text-gray-700 dark:text-gray-300 text-sm">
-            Duration: {{ movie.duration }} min.
-          </div>
-          <a
-            :href="movie.url"
-            target="_blank"
-            class="text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-600 text-sm mt-2 inline-block"
-            >Ver en IMDb</a
-          >
-        </div>
-      </div>
+      <MovieCard :movie="movie" />
+    </div>
+    <div
+      v-if="filteredMovies.length === 0"
+      class="col-span-full mt-4 text-center text-xl text-gray-700 dark:text-gray-300"
+    >
+      No movies found
     </div>
   </div>
 </template>
@@ -35,7 +15,8 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import type { Movie, MovieFilter } from '@/movies/types'
-import { useGetMoviesApi } from '../composables/useGetMoviesApi'
+import { useGetMoviesApi } from '@/movies/composables/useGetMoviesApi'
+import MovieCard from '@/movies/components/MovieCard.vue'
 
 type Props = {
   filters: MovieFilter
@@ -61,7 +42,6 @@ const filteredMovies = computed(() => {
     return isGenreMatch && isNameMatch && isDescriptionMatch
   })
 })
-
 </script>
 
 <style scoped></style>

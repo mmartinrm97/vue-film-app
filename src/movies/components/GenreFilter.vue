@@ -1,10 +1,10 @@
 <template>
   <div
-    class="p-4 bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-300 rounded dark:shadow-lg shadow-lg dark:overflow-hidden overflow-hidden"
+    class="flex flex-col gap-y-6 overflow-hidden rounded bg-gray-100 p-4 text-gray-800 shadow-lg dark:overflow-hidden dark:bg-gray-900 dark:text-gray-300 dark:shadow-lg"
   >
     <!-- Display  name filter-->
-    <div class="mb-4">
-      <label for="name" class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2"
+    <div>
+      <label for="name" class="mb-2 block text-sm font-bold text-gray-700 dark:text-gray-300"
         >Name:</label
       >
       <input
@@ -13,27 +13,27 @@
         v-model.trim="nameFilter"
         type="text"
         placeholder="Enter movie name"
-        class="shadow appearance-none disabled:cursor-not-allowed border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-300 leading-tight focus:outline-none focus:shadow-outline dark:focus:shadow-outline"
+        class="focus:shadow-outline dark:focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none disabled:cursor-not-allowed dark:text-gray-300"
       />
     </div>
 
     <!-- Display description filter -->
-    <div class="mb-4">
-      <label for="description" class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2"
+    <div>
+      <label for="description" class="mb-2 block text-sm font-bold text-gray-700 dark:text-gray-300"
         >Description:</label
       >
-      <input
+      <textarea
         :disabled="hasError"
         id="description"
         v-model.trim="descriptionFilter"
-        type="text"
+        type="texta"
         placeholder="Enter movie description"
-        class="shadow disabled:cursor-not-allowed appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-300 leading-tight focus:outline-none focus:shadow-outline dark:focus:shadow-outline"
+        class="focus:shadow-outline dark:focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none disabled:cursor-not-allowed dark:text-gray-300"
       />
     </div>
     <!-- Display genre filter -->
-    <div class="mb-4">
-      <label for="genre" class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2"
+    <div>
+      <label for="genre" class="mb-2 block text-sm font-bold text-gray-700 dark:text-gray-300"
         >Genre:</label
       >
       <input
@@ -41,7 +41,7 @@
         :disabled="hasError"
         v-model.trim="selectedGenre"
         @change="addGenreFilter"
-        class="disabled:cursor-not-allowed shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-300 leading-tight focus:outline-none focus:shadow-outline dark:focus:shadow-outline"
+        class="focus:shadow-outline dark:focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none disabled:cursor-not-allowed dark:text-gray-300"
         list="genre-list"
         placeholder="Enter movie genre"
       />
@@ -51,20 +51,20 @@
           {{ genre.name }}
         </option>
       </datalist>
-      <span v-if="!isValidGenre" class="text-red-600 text-sm"
+      <span v-if="!isValidGenre" class="text-sm text-red-600"
         >"{{ selectedGenre }}" is not a valid genre</span
       >
     </div>
 
     <!-- Display selected genres as labels -->
-    <div class="mb-2">
+    <div>
       <span
         v-for="genre in genresFilter"
         :key="genre"
-        class="inline-block bg-gray-300 text-gray-800 text-xs font-semibold rounded-full px-2 py-1 mr-1"
+        class="mr-1 inline-block rounded-full bg-gray-300 px-2 py-1 text-xs font-semibold text-gray-800"
       >
         {{ genre }}
-        <button @click="removeGenreFilter(genre)" class="ml-1 text-gray-600 text-xs">×</button>
+        <button @click="removeGenreFilter(genre)" class="ml-1 text-xs text-gray-600">×</button>
       </span>
     </div>
   </div>
