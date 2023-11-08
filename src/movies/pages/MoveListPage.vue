@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <div class="flex flex-col gap-y-4">
     <div class="flex items-center justify-between">
-      <h1 class="text-3xl font-semibold text-gray-900 dark:text-gray-50">Movie Filter App</h1>
+      <h1 class="text-3xl font-semibold text-gray-900 dark:text-gray-50">Vue Movie App</h1>
       <button
         @click="toggleDarkMode()"
-        class="focus:shadow-outline rounded bg-gray-300 px-4 py-2 font-semibold text-gray-800 hover:bg-gray-400 focus:outline-none dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
+        class="rounded  bg-sky-600 px-4 py-2 font-semibold text-white hover:bg-sky-700 focus:outline-none dark:bg-sky-300 dark:text-sky-950 dark:hover:bg-sky-200"
       >
         <SunIcon v-show="isDarkMode" />
         <MoonIcon v-show="!isDarkMode" />
@@ -39,7 +39,9 @@ import MovieListLoading from '@/movies/components/MovieListLoading.vue'
 import MovieListError from '@/movies/components/MovieListError.vue'
 import { AxiosError } from 'axios'
 
-const isDarkMode = useDark()
+const isDarkMode = useDark({
+  disableTransition: false
+})
 const toggleDarkMode = useToggle(isDarkMode)
 
 const filters = reactive({

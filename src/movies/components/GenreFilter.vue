@@ -1,7 +1,14 @@
 <template>
   <div
-    class="flex flex-col gap-y-6 overflow-hidden rounded bg-gray-100 p-4 text-gray-800 shadow-lg dark:overflow-hidden dark:bg-gray-900 dark:text-gray-300 dark:shadow-lg"
+    class="flex flex-col gap-y-6 overflow-hidden rounded-lg bg-sky-50 p-4 text-gray-800 shadow-lg dark:overflow-hidden dark:bg-sky-950 dark:text-gray-300"
   >
+    <div>
+      <!-- Filter tile -->
+      <h2>
+        <span class="text-xl font-semibold text-gray-900 dark:text-gray-100">Filters:</span>
+        <span class="ml-2 text-sm text-gray-700 dark:text-gray-300">({{ totalFilters }})</span>
+      </h2>
+    </div>
     <!-- Display  name filter-->
     <div>
       <label for="name" class="mb-2 block text-sm font-bold text-gray-700 dark:text-gray-300"
@@ -13,7 +20,7 @@
         v-model.trim="nameFilter"
         type="text"
         placeholder="Enter movie name"
-        class="focus:shadow-outline dark:focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none disabled:cursor-not-allowed dark:text-gray-300"
+        class="focus:shadow-outline dark:focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none disabled:cursor-not-allowed"
       />
     </div>
 
@@ -28,7 +35,7 @@
         v-model.trim="descriptionFilter"
         type="texta"
         placeholder="Enter movie description"
-        class="focus:shadow-outline dark:focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none disabled:cursor-not-allowed dark:text-gray-300"
+        class="focus:shadow-outline dark:focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none disabled:cursor-not-allowed"
       />
     </div>
     <!-- Display genre filter -->
@@ -41,7 +48,7 @@
         :disabled="hasError"
         v-model.trim="selectedGenre"
         @change="addGenreFilter"
-        class="focus:shadow-outline dark:focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none disabled:cursor-not-allowed dark:text-gray-300"
+        class="focus:shadow-outline dark:focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none disabled:cursor-not-allowed"
         list="genre-list"
         placeholder="Enter movie genre"
       />
@@ -71,7 +78,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted, watch, computed } from 'vue'
 import type { MovieFilter, MovieGenre } from '@/movies/types'
 import { useGetGenresApi } from '../composables/useGetGenresApi'
 
@@ -93,6 +100,21 @@ const isValidGenre = ref(true)
 const genresFilter = ref<string[]>([])
 const nameFilter = ref<string>('')
 const descriptionFilter = ref<string>('')
+
+// total Filters
+const totalFilters = computed(() => {
+  let count = 0
+
+  if (nameFilter.value.trim() !== '') {
+    count++
+  }
+  if (descriptionFilter.value.trim() !== '') {
+    count++
+  }
+  count += genresFilter.value.length
+
+  return count
+})
 
 watch([selectedGenre, nameFilter, descriptionFilter], () => {
   const newFilters: MovieFilter = {
