@@ -4,7 +4,7 @@
   >
     <img class="h-72 w-full object-cover" :src="movie.movie_cover" :alt="movie.title" />
     <div class="p-4">
-      <h2 class="text-xl font-semibold text-gray-900 dark:text-gray-100">{{ movie.title }}</h2>
+      <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100">{{ movie.title }}</h3>
       <p class="text-sm text-gray-700 dark:text-gray-300">{{ movie.description }}</p>
       <div class="mt-2">
         <span

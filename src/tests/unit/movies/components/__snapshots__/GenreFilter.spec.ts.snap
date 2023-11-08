@@ -1,0 +1,18 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`GenreFilter component > renders the component with initial state 1`] = `
+"<div class=\\"flex flex-col gap-y-6 overflow-hidden rounded-lg bg-sky-50 p-4 text-gray-800 shadow-lg dark:overflow-hidden dark:bg-sky-950 dark:text-gray-300\\" filters=\\"[object Object]\\">
+  <div>
+    <!-- Filter tile -->
+    <h2><span class=\\"text-xl font-semibold text-gray-900 dark:text-gray-100\\">Filters:</span><span class=\\"ml-2 text-sm text-gray-700 dark:text-gray-300\\">(0)</span></h2>
+  </div><!-- Display  name filter-->
+  <div><label for=\\"name\\" class=\\"mb-2 block text-sm font-bold text-gray-700 dark:text-gray-300\\">Name:</label><input disabled=\\"\\" id=\\"name\\" type=\\"text\\" placeholder=\\"Enter movie name\\" class=\\"focus:shadow-outline dark:focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none disabled:cursor-not-allowed\\"></div><!-- Display description filter -->
+  <div><label for=\\"description\\" class=\\"mb-2 block text-sm font-bold text-gray-700 dark:text-gray-300\\">Description:</label><textarea disabled=\\"\\" id=\\"description\\" type=\\"texta\\" placeholder=\\"Enter movie description\\" class=\\"focus:shadow-outline dark:focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none disabled:cursor-not-allowed\\"></textarea></div><!-- Display genre filter -->
+  <div><label for=\\"genre\\" class=\\"mb-2 block text-sm font-bold text-gray-700 dark:text-gray-300\\">Genre:</label><input id=\\"genre\\" disabled=\\"\\" class=\\"focus:shadow-outline dark:focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none disabled:cursor-not-allowed\\" list=\\"genre-list\\" placeholder=\\"Enter movie genre\\"><datalist id=\\"genre-list\\" class=\\"w-full\\">
+      <!-- Define la lista de géneros -->
+    </datalist>
+    <!--v-if-->
+  </div><!-- Display selected genres as labels -->
+  <div></div>
+</div>"
+`;

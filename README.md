@@ -1,6 +1,6 @@
-# vue-vite-film-app-vue-cli
+# vue-vite-film-app
 
-This template should help get you started developing with Vue 3 in Vite.
+This app is a simple film app that uses the an external api to fetch data.
 
 ## Recommended IDE Setup
 
