@@ -1,6 +1,8 @@
 <template>
   <div>
-    <h3 class="col-span-full text-xl font-semibold text-gray-900 dark:text-gray-100 pb-10">Movie List</h3>
+    <h3 class="col-span-full pb-10 text-xl font-semibold text-gray-900 dark:text-gray-100">
+      Movie List
+    </h3>
     <div v-if="error" class="col-span-full">
       <MovieListError :error="error" />
     </div>
@@ -25,12 +27,13 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import type { Movie, MovieFilter } from '@/movies/types'
 import { useGetMoviesApi } from '@/movies/composables/useGetMoviesApi'
 import MovieCard from '@/movies/components/MovieCard.vue'
 import MovieListLoading from '@/movies/components/MovieListLoading.vue'
 import MovieListError from '@/movies/components/MovieListError.vue'
+import { useFilteredMovies } from '@/movies/composables'
 
 type Props = {
   filters: MovieFilter
@@ -41,22 +44,7 @@ const movies = ref<Movie[]>([])
 const error = ref<Error | null>(null)
 const isLoading = ref<boolean>(false)
 
-const filteredMovies = computed(() => {
-  return movies.value.filter((movie) => {
-    const movieGenres = movie.genre.split(', ').map((genre) => genre.trim())
-    const isGenreMatch = props.filters.genre.every((genre) => movieGenres.includes(genre))
-
-    const isNameMatch =
-      props.filters.name === '' ||
-      movie.title.toLowerCase().includes(props.filters.name.toLowerCase())
-
-    const isDescriptionMatch =
-      props.filters.description === '' ||
-      movie.description.toLowerCase().includes(props.filters.description.toLowerCase())
-
-    return isGenreMatch && isNameMatch && isDescriptionMatch
-  })
-})
+const { filteredMovies } = useFilteredMovies(props.filters, movies)
 
 onMounted(async () => {
   isLoading.value = true

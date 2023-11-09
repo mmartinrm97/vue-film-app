@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col gap-y-6 overflow-hidden rounded-lg bg-sky-50 p-4 text-gray-800 shadow-lg dark:overflow-hidden dark:bg-sky-950 dark:text-gray-300"
+    class="flex flex-col gap-y-6 overflow-hidden rounded-lg bg-sky-50 p-4 text-gray-800 shadow-lg transition-all duration-700 dark:overflow-hidden dark:bg-sky-950 dark:text-gray-300"
   >
     <div>
       <!-- Filter tile -->

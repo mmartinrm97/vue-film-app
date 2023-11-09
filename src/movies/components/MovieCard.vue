@@ -1,6 +1,6 @@
 <template>
   <div
-    class="h-full overflow-hidden rounded-lg bg-sky-50 shadow-lg transition-all hover:scale-105 hover:shadow-xl dark:overflow-hidden dark:bg-sky-950 dark:shadow-lg"
+    class="h-full overflow-hidden rounded-lg bg-sky-50 shadow-lg transition-all duration-700 hover:scale-105 hover:shadow-xl dark:overflow-hidden dark:bg-sky-950 dark:shadow-lg"
   >
     <img class="h-72 w-full object-cover" :src="movie.movie_cover" :alt="movie.title" />
     <div class="p-4">
