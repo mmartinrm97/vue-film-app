@@ -30,7 +30,16 @@ describe('useFilteredMovies', () => {
       genre: 'Biography, Drama, History',
       url: 'https://www.imdb.com/title/tt0111161/',
       movie_cover: 'https://www.imdb.com/title/tt0111161/mediaviewer/rm1860098049/',
-      duration: 140
+      duration: 220
+    },
+    {
+      id: '4',
+      title: 'Movie 4',
+      description: 'Description 4',
+      genre: 'Family, Fantasy',
+      url: 'https://www.imdb.com/title/tt0111161/',
+      movie_cover: 'https://www.imdb.com/title/tt0111161/mediaviewer/rm1860098049/',
+      duration: 120
     }
   ])
 
