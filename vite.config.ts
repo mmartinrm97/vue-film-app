@@ -12,5 +12,10 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
+  },
+  test: {
+    setupFiles:[
+      'src/tests/unit/msw.setup.ts'
+    ]
   }
 })
